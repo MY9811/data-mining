@@ -89,7 +89,7 @@ predictions_validation = gsearch1.best_estimator_.predict_proba(x_test)[:,1]
 fpr,tpr,_ = roc_curve(y_test,predictions_validation)
 roc_auc = auc(fpr,tpr)
 plt.title('ROC Validation')
-plt.plot(fpr,tpr,color='darkorange',lw=2,lable='AUC = %0.2f'%roc_auc)
+plt.plot(fpr,tpr,color='darkorange',lw=2,label='AUC = %0.2f'%roc_auc)
 plt.plot([0, 1], [0, 1], color='navy', linestyle='--');
 plt.legend(loc = 'lower right')
 plt.xlim([0,1])
@@ -103,15 +103,6 @@ plt.show()
 
 
 
-
-
-
-#备用：用交叉验证挑选最佳模型
-clf = DecisionTreeClassifier(max_depth = None, min_samples_split = 2,random_state=0) #参数如何设置
-scores1 = cross_val_socre(clf,x_train,y_train)
-print(scores1.mean)
-scores2 = cross_val_socre(rcf,x_train,y_train)
-print(scores2.mean)
 
 
 
