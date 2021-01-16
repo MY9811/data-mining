@@ -1,15 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Jan 16 09:32:59 2021
-
-@author: 元元吃汤圆
-"""
-import time
-import sys
-import importlib
-importlib.reload(sys)
-# sys.setdefaultencoding( "utf-8" )
-
 import numpy as np
 import csv
 import scipy
@@ -49,7 +37,7 @@ knn = KNeighborsClassifier()
 params=[{"weights":["uniform"],"n_neighbors":[k for k in range(1,11)]},
          {"weights":["distance"],"n_neighbors":[k for k in range(1,11)],"p":[k for k in range(1,6)]}]
 
-gridsearch=GridSearchCV(knn,params)
+gridsearch=GridSearchCV(knn,params,scoring='roc_auc',cv=5)
 gridsearch.fit(x_train,y_train)
 print("best_score",gridsearch.best_score_)
 print("best_params",gridsearch.best_params_)
@@ -72,4 +60,3 @@ plt.ylim([0,1])
 plt.ylabel('True positive rate')
 plt.xlabel('False positive rate')
 plt.show()
-
